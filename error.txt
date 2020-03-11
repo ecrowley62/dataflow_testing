@@ -1,0 +1,20 @@
+(env) ╭─eric@FW-Inspiron15-1TFLKP2 ~/Repos/dataflow_testing ‹master*› 
+╰─$  env PTVSD_LAUNCHER_PORT=50503 /home/eric/Repos/dataflow_testing/env/bin/python /home/eric/.vscode-server/extensions/ms-python.python-2020.2.64397/pythonFiles/lib/python/new_ptvsd/no_wheels/ptvsd/launcher /home/eric/Repos/dataflow_testing/deploy_issue.py                                                                                                               247 ↵
+/home/eric/Repos/dataflow_testing/env/lib/python3.6/site-packages/apache_beam/runners/dataflow/dataflow_runner.py:740: BeamDeprecationWarning: BigQuerySink is deprecated since 2.11.0. Use WriteToBigQuery instead.
+  kms_key=transform.kms_key))
+WARNING:apache_beam.utils.retry:Retry with exponential backoff: waiting for 4.973256765075485 seconds before retrying submit_job_description because we caught exception: apitools.base.py.exceptions.InvalidUserInputError: Request missing required parameter location
+ Traceback for above exception (most recent call last):
+  File "/home/eric/Repos/dataflow_testing/env/lib/python3.6/site-packages/apache_beam/utils/retry.py", line 226, in wrapper
+    return fun(*args, **kwargs)
+  File "/home/eric/Repos/dataflow_testing/env/lib/python3.6/site-packages/apache_beam/runners/dataflow/internal/apiclient.py", line 601, in submit_job_description
+    response = self._client.projects_locations_jobs.Create(request)
+  File "/home/eric/Repos/dataflow_testing/env/lib/python3.6/site-packages/apache_beam/runners/dataflow/internal/clients/dataflow/dataflow_v1b3_client.py", line 629, in Create
+    config, request, global_params=global_params)
+  File "/home/eric/Repos/dataflow_testing/env/lib/python3.6/site-packages/apitools/base/py/base_api.py", line 703, in _RunMethod
+    download)
+  File "/home/eric/Repos/dataflow_testing/env/lib/python3.6/site-packages/apitools/base/py/base_api.py", line 684, in PrepareHttpRequest
+    method_config, request, relative_path=url_builder.relative_path)
+  File "/home/eric/Repos/dataflow_testing/env/lib/python3.6/site-packages/apitools/base/py/base_api.py", line 584, in __ConstructRelativePath
+    relative_path=relative_path)
+  File "/home/eric/Repos/dataflow_testing/env/lib/python3.6/site-packages/apitools/base/py/util.py", line 124, in ExpandRelativePath
+    'Request missing required parameter %s' % param)
