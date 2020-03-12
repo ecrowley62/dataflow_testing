@@ -14,8 +14,8 @@ google_cloud_options.project = 'freightwaves-engineering-prod'
 google_cloud_options.job_name = f"tender-rates-{uuid.uuid4().hex}"
 google_cloud_options.staging_location = 'gs://fw-etl-tmp-prod/'
 google_cloud_options.temp_location = 'gs://fw-etl-tmp-prod/'
-#options.view_as(StandardOptions).runner = 'DataFlowRunner'
-options.view_as(StandardOptions).runner = 'DirectRunner'
+options.view_as(StandardOptions).runner = 'DataFlowRunner'
+#options.view_as(StandardOptions).runner = 'DirectRunner'
 
 
 # Table specifications for loading into BigQuery
@@ -149,6 +149,16 @@ def str_to_dict(text):
     for val, col in zip(vals_list,bq_table_columns):
         vals_dict[col] = val
     return vals_dict
+
+
+
+
+# Table specifications for loading into BigQuery
+forecast_table_spec = bigquery.TableReference(
+    projectId='freightwaves-engineering-prod',
+    datasetId='warehouse',
+    tableId='FWrates_tender_zip3_forecast_mu'
+)
 
 
 with beam.Pipeline(options=options) as p:
