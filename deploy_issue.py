@@ -14,7 +14,10 @@ google_cloud_options.project = 'freightwaves-engineering-prod'
 google_cloud_options.job_name = f"tender-rates-{uuid.uuid4().hex}"
 google_cloud_options.staging_location = 'gs://fw-etl-tmp-prod/'
 google_cloud_options.temp_location = 'gs://fw-etl-tmp-prod/'
-options.view_as(StandardOptions).runner = 'DataFlowRunner'
+google_cloud_options.region = 'us-east1'
+#google_cloud_options.region = 'us-east4'
+#google_cloud_options.zone = 'us-east4-a'
+options.view_as(StandardOptions).runner = 'DataflowRunner'
 #options.view_as(StandardOptions).runner = 'DirectRunner'
 
 
@@ -31,6 +34,7 @@ bq_table_columns = ['asofdate','zip3','volume_national','rejects_national','volu
 
 # Filter out header row
 def is_data(text):
+    bq_table_columns = ['asofdate','zip3','volume_national','rejects_national','volume_outgoing','otms','nrejects_outgoing','otri','volume_incoming','itms','nrejects_incoming','itri','haul','norm_haul','volume_zip3']
     header_str = ','.join(bq_table_columns)
     if header_str == text:
         return False
@@ -40,6 +44,7 @@ def is_data(text):
 
 # Convert the csv string into a python dictionary
 def str_to_dict(text):
+    bq_table_columns = ['asofdate','zip3','volume_national','rejects_national','volume_outgoing','otms','nrejects_outgoing','otri','volume_incoming','itms','nrejects_incoming','itri','haul','norm_haul','volume_zip3']
     vals_list = text.split(',')
     vals_dict = {}
     for val, col in zip(vals_list,bq_table_columns):
